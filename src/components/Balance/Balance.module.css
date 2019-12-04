@@ -1,0 +1,20 @@
+.balance {
+  height: 95px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.balance p {
+  margin: 0 10px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.totalDeposit span {
+  color: #99cc66;
+}
+
+.totalWithdraw span {
+  color: #ff6666;
+}

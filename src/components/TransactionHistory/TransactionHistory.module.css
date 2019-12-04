@@ -1,0 +1,49 @@
+.history {
+  border-collapse: collapse;
+  width: 873px;
+  margin: 30px auto;
+  box-shadow: 0 2px 2px #999999;
+}
+
+thead {
+  text-transform: uppercase;
+  background-color: #ebeef2;
+}
+
+th,
+td {
+  width: 33.333%;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+th {
+  border: 2px solid #ffffff;
+}
+td {
+  background-color: #ffffff;
+  border: 2px solid #cccccc;
+  font-size: 15px;
+  font-family: Arial, Helvetica, sans-serif;
+  color: rgb(92, 105, 117);
+}
+
+td:first-child {
+  text-align: left;
+  padding-left: 90px;
+}
+
+td:nth-child(2) {
+  border-right: 1px solid #e0e6e7;
+  border-left: 1px solid #e0e6e7;
+  text-align: right;
+  padding-right: 120px;
+}
+
+td:last-child {
+  text-align: center;
+}
+
+td:first-child:first-letter {
+  text-transform: uppercase;
+}
