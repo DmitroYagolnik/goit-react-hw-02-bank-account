@@ -49,5 +49,5 @@
     "prettier": "^1.18.2",
     "prop-types": "^15.7.2"
   },
-  "homepage": "https://dmitroyagolnik.github.io/.../"
+  "homepage": "https://dmitroyagolnik.github.io/goit-react-hw-02-bank-account/"
 }
