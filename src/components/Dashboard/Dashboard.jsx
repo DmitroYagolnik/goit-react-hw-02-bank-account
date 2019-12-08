@@ -3,6 +3,7 @@ import Controls from '../Controls/Controls';
 import Balance from '../Balance/Balance';
 import TransactionHistory from '../TransactionHistory/TransactionHistory';
 import createTransaction from '../../applications/createTransaction';
+import 'react-toastify/dist/ReactToastify.css';
 import style from './Dashboard.module.css';
 
 class Dashboard extends Component {
@@ -11,19 +12,13 @@ class Dashboard extends Component {
     balance: 0,
   };
 
-  handleDeposit = amount => {
-    const newTransaction = createTransaction(amount, 'deposit');
+  handleControlsBtn = (amount, type) => {
+    const newTransaction = createTransaction(amount, type);
     this.setState(prevState => ({
-      balance: prevState.balance + amount,
-      transactions: [...prevState.transactions, newTransaction],
-    }));
-  };
-
-  handleWithdraw = amount => {
-    console.log('amount Withdraw', amount);
-    const newTransaction = createTransaction(amount, 'withdrawal');
-    this.setState(prevState => ({
-      balance: prevState.balance - amount,
+      balance:
+        type === 'deposit'
+          ? prevState.balance + amount
+          : prevState.balance - amount,
       transactions: [...prevState.transactions, newTransaction],
     }));
   };
@@ -49,11 +44,7 @@ class Dashboard extends Component {
 
     return (
       <div className={style.dashboard}>
-        <Controls
-          onDeposit={this.handleDeposit}
-          onWithdraw={this.handleWithdraw}
-          balance={balance}
-        />
+        <Controls onBotonClick={this.handleControlsBtn} balance={balance} />
         <Balance balance={balance} income={income} expenses={expenses} />
         <TransactionHistory items={transactions} />
       </div>

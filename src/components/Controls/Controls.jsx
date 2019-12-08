@@ -6,8 +6,7 @@ import style from './Controls.module.css';
 
 class Controls extends Component {
   static propTypes = {
-    onDeposit: PropTypes.func.isRequired,
-    onWithdraw: PropTypes.func.isRequired,
+    onBotonClick: PropTypes.func.isRequired,
     balance: PropTypes.number.isRequired,
   };
 
@@ -20,31 +19,9 @@ class Controls extends Component {
     this.setState({ amount: value });
   };
 
-  handleDeposite = () => {
-    if (this.state.amount === '') {
-      toast.dismiss();
-      toast.error(notification.enterAmount, {
-        className: style.errorToast,
-      });
-      return;
-    }
-
-    if (this.state.amount <= 0) {
-      toast.dismiss();
-      toast.error(notification.negativeValues, {
-        className: style.errorToast,
-      });
-      this.reset();
-      return;
-    }
+  handleBtn = evt => {
     toast.dismiss();
-    this.props.onDeposit(Number(this.state.amount));
-    this.reset();
-  };
-
-  handleWithdraw = () => {
     if (this.state.amount === '') {
-      toast.dismiss();
       toast.error(notification.enterAmount, {
         className: style.errorToast,
       });
@@ -52,20 +29,24 @@ class Controls extends Component {
     }
 
     if (this.state.amount <= 0) {
-      toast.dismiss();
       toast.error(notification.negativeValues);
       this.reset();
       return;
     }
 
-    if (this.state.amount > this.props.balance) {
-      toast.dismiss();
-      toast.error(notification.notEnoughMoney);
+    if (evt.target.name === 'withdrawBtn') {
+      if (this.state.amount > this.props.balance) {
+        toast.error(notification.notEnoughMoney);
+        this.reset();
+        return;
+      }
+
+      this.props.onBotonClick(Number(this.state.amount), 'withdrawal');
       this.reset();
       return;
     }
-    toast.dismiss();
-    this.props.onWithdraw(Number(this.state.amount));
+
+    this.props.onBotonClick(Number(this.state.amount), 'deposit');
     this.reset();
   };
 
@@ -84,10 +65,10 @@ class Controls extends Component {
           value={amount}
           onChange={this.handleChange}
         />
-        <button type="button" onClick={this.handleDeposite}>
+        <button type="button" name="depositBtn" onClick={this.handleBtn}>
           Deposit
         </button>
-        <button type="button" onClick={this.handleWithdraw}>
+        <button type="button" name="withdrawBtn" onClick={this.handleBtn}>
           Withdraw
         </button>
       </section>
